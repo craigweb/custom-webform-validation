@@ -1,0 +1,6 @@
+
+name = Custom Webform Validation
+description = A sandbox module, which defines custom webform validation.
+core = 7.x
+package = Sandbox
+dependencies[] = webform

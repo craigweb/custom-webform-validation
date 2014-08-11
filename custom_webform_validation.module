@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * @file
+ * A sandbox module, which defines custom webform validation.
+ */
+
+
+/**
+ * Implements hook_form_alter().
+ */
+function custom_webform_validation_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'webform_client_form_5') {
+    $form['#validate'][] = 'custom_webform_validation_submit';
+  }
+}
+
+
+/**
+ * Custom submit handler.
+ */
+function custom_webform_validation_submit($form, &$form_state) {
+  $values = $form_state['values']['submitted'];
+  if (!preg_match('/^[a-zA-Z]{2}[0-9]{6}$/', $values['account_id'])) {
+    form_set_error(
+      'submitted][account_id',
+      'Invalid data entered. Format should be LLNNNNNN (L: Letter/N: Number)');
+  }
+}
